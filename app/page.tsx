@@ -51,9 +51,9 @@ const HomePage = () => {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="max-w-7xl mx-auto px-7 sm:px-6 lg:px-8 py-7 mb-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {products.slice(0, visibleCount).map((product) => (
-                <div key={product.id} className="bg-white shadow-lg rounded-lg overflow-hidden group">
+                <div key={product.id}  className="bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6">
                   <Link href={`/product/${product.id}`} passHref>
                     <img
                       src={product.image}
@@ -66,19 +66,17 @@ const HomePage = () => {
                     <p className="text-gray-600 text-sm mt-2 truncate">{product.description}</p>
                     <p className="text-lg font-bold text-gray-900 mt-4">${product.price}</p>
                   </div>
-                  <div className="p-4 bg-gray-100 text-center group-hover:bg-gray-200">
-                    <button
-                      className="text-white bg-blue-600 hover:bg-blue-700 py-2 px-4 rounded-md transition-all"
-                      onClick={() => handleAddToCart(product)}
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
+                  <button
+                  className="w-full bg-blue-600 text-white py-3 px-5 rounded-lg mt-6 font-medium hover:bg-blue-700 transition-all"
+                  onClick={() => handleAddToCart(product)}
+                >
+                  Add to Cart
+                </button>
                 </div>
               ))}
             </div>
             {visibleCount < products.length && (
-              <div className="text-center mt-8">
+              <div className="text-center mb-8">
                 <button
                   className="text-white bg-blue-600 hover:bg-blue-700 py-2 px-6 rounded-md shadow-lg transition-all"
                   onClick={handleLoadMore}

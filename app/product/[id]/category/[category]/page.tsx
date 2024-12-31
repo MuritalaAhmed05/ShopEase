@@ -52,17 +52,28 @@ const CategoryPage = () => {
         <p className="text-xl text-gray-600 text-center mx-auto mb-8">
             Find exactly what you're looking for across our extensive collection of products
           </p>
-        <div className="grid items-center grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mx-auto">
-          {categories.map((category) => (
-            <button
-              key={category}
-              className="text-nowrap w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 px-6 rounded-lg font-semibold shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 transition-all transform hover:-translate-y-1"
-              onClick={() => handleCategoryClick(category)}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+          <div className="grid items-center grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mx-auto">
+  {loading ? (
+    // Loading Skeleton
+    Array.from({ length: 6 }).map((_, index) => (
+      <div
+        key={index}
+        className="h-16 bg-gray-200 rounded-lg animate-pulse"
+      />
+    ))
+  ) : (
+    // Actual Categories
+    categories.map((category) => (
+      <button
+        key={category}
+        className="text-nowrap w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 px-6 rounded-lg font-semibold shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 transition-all transform hover:-translate-y-1"
+        onClick={() => handleCategoryClick(category)}
+      >
+        {category}
+      </button>
+    ))
+  )}
+</div>
       </div>
 
       {/* Products Section */}

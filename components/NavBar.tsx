@@ -4,7 +4,7 @@ import { ShoppingCart, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/app/context/cartdcontext';
 import { useState } from 'react';
-
+// import { ModeToggle } from '@/components/ui/toggle';
 export default function Header() {
   const { itemCount } = useCart(); // Get the cart item count
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -22,7 +22,7 @@ export default function Header() {
             ShopEase
           </Link>
         </div>
-
+       
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-4">
           <Link href="/cart" className="relative">
@@ -46,9 +46,25 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu Icon */}
-        <button onClick={toggleMobileMenu} className="md:hidden">
-          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="flex items-center space-x-4 md:hidden">
+          {/* Cart Icon */}
+          <Link href="/cart" className="relative">
+            <Button variant="ghost" size="icon">
+              <ShoppingCart className="h-6 w-6" />
+              <span className="sr-only">Cart</span>
+            </Button>
+            {itemCount > 0 && (
+              <span className="absolute top-[-4px] right-[-4px] bg-red-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
+                {itemCount}
+              </span>
+            )}
+          </Link>
+
+          {/* Hamburger Menu Icon */}
+          <button onClick={toggleMobileMenu}>
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </nav>
 
       {/* Background Overlay */}
